@@ -20,12 +20,12 @@ authors:
 cff-version: 1.2.0
 date-released: "2026-08-20"
 identifiers:
-  - description: "The GitHub release URL of tag 1.0.0."
+  - description: "The GitHub release URL of tag v1.0.0."
     type: url
-    value: "https://github.com/imageomics/satrees/releases/tag/1.0.0"
-  - description: "The GitHub source tree URL aligned to release tag 1.0.0."
+    value: "https://github.com/Imageomics/ViTrees/releases/tag/v1.0.0"
+  - description: "The GitHub URL of the commit tagged with v1.0.0."
     type: url
-    value: "https://github.com/imageomics/satrees/tree/1.0.0"
+    value: "https://github.com/Imageomics/ViTrees/tree/<commit-hash>" # Update on release
 keywords:
   - "imageomics"
   - "disturbance"
@@ -37,7 +37,7 @@ keywords:
   - "tree-crowns"
 license: "MIT"
 message: "If you find this work helpful in your research, please cite it."
-repository-code: "https://github.com/imageomics/satrees"
-title: "SAtrEes"
+repository-code: "https://github.com/Imageomics/ViTrees"
+title: "ViTrees: Vision Transformers to Classify Landscape-Scale Disturbance"
 version: "1.0.0"
 type: software
