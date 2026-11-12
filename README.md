@@ -1,13 +1,13 @@
-# SAtrEes
+# ViTrees: Vision Transformers to Classify Landscape-Scale Disturbance
 
-Extract land-use disturbance history for NEON Harvard Forest (HARV) tree crowns from RGB airborne imagery, gridded at sub-meter resolution.
+[FloraPalooza](https://github.com/Imageomics/FloraPalooza-2026) project to extract land-use disturbance history for NEON Harvard Forest (HARV) tree crowns from RGB airborne imagery, gridded at sub-meter resolution.
 
 The pipeline builds a fine-grained grid over the HARV Airborne Observation Platform (AOP) footprint, crops NEON RGB mosaic imagery to it, and labels every grid cell with its disturbance history (agricultural abandonment, natural disturbance, the 1938 hurricane, and silviculture treatments) drawn from the Harvard Forest land-use history GIS archive.
 
 ## Repository structure
 
 ```
-SAtrEes/
+ViTrees/
 ├── Grid_and_crop_HARV_RGB.R          # build the 25m/16x16 sub-grid and crop RGB tiles to it
 ├── Grid_and_crop_HARV_RGB.sh         # SLURM submission script for the above (OSC)
 ├── scripts/
@@ -74,7 +74,3 @@ Output is written as a labeled grid (`HARV_grid_25m_disturbance` / `HARV_grid_25
 ## Reproducing the outputs
 
 Outputs are large (the full 16×16 sub-grid disturbance layer is several GB) and are generated to the repository root / `data/` locally — they are gitignored rather than committed.
-
-## License
-
-[MIT](LICENSE)
