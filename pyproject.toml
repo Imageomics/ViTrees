@@ -1,0 +1,15 @@
+[project]
+name = "satrees"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "saev",
+    # pydantic >= 2.12 emits UnsupportedFieldAttributeWarning for wandb's generated models.
+    "pydantic>=2.5.2,<2.12",
+    "streamlit>=1.50",
+]
+
+[tool.uv.sources]
+saev = { git = "https://github.com/Imageomics/saev.git" }

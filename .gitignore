@@ -51,6 +51,17 @@ rsconnect/
 # Mac System
 .DS_Store
 
+# SLURM log files
+slurm-*.out
+
+# Python virtual environment
+.venv/
+__pycache__/
+
+# saev log files 
+logs/
+.wandb/
+
 # Generated geospatial grid/disturbance outputs (large, reproducible from scripts)
 *.gpkg
 *.gpkg-shm

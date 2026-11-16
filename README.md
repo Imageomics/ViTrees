@@ -22,6 +22,18 @@ Large geospatial outputs (`.gpkg`/`.shp`/`.kml` grids and disturbance layers) an
 
 ## Requirements
 
+- R (tested with 4.4.0) with `sf` and `terra`
+- uv (tested with v0.12.5) for python package management
+- DINOv3 SAT493M version (tested with ViT-L/16). Request access [here](https://ai.meta.com/resources/models-and-libraries/dinov3-downloads/)
+
+## Python Environment Setup
+[`uv`](https://docs.astral.sh/uv/) is used for python environment management. Install `uv` using the following command:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Then, set up the python environment using `uv sync`
 R (tested with 4.4.0) with the `sf` and `terra` packages (`Label_grid_disturbance_history.R` also uses `dplyr`); the `Grid_and_crop_HARV_RGB.sh` SLURM script loads GDAL/PROJ modules on OSC.
 
 ## User guide
@@ -73,4 +85,24 @@ Output is written as a labeled grid (`HARV_grid_25m_disturbance` / `HARV_grid_25
 
 ## Reproducing the outputs
 
+- `Shapefiles/HARV_grid_25m.shp` — 25 m grid
+- `Shapefiles/HARV_grid_25m_sub16.gpkg` — nested 16 × 16 sub-grid
+- `Imagery/NEON/HARV/RGB_25m_crops/*.tif` — one RGB crop per 25 m cell
+
 Outputs are large (the full 16×16 sub-grid disturbance layer is several GB) and are generated to the repository root / `data/` locally — they are gitignored rather than committed.
+
+# SAE Training
+
+To automatically learn features corresponding to disturbance types and timelines, we train SAEs on the downloaded and cropped image data using the `saev` libary, which is included as a dependency of this project.
+
+## Preparing Foundation Model
+
+For this project we use DINOv3 SAT493M ViT-L/16 (Request access [here](https://ai.meta.com/resources/models-and-libraries/dinov3-downloads/)). This model is not directly compatible with the current version of the saev library, though. To address this, certain unused portions of the model need to be dropped. This can be easily done using the provided `saes/scripts/strip_local_cls_norm.py` script. Use `saes/scripts/strip_local_cls_norm.py --help` for more info.
+
+## Generating Foundation Model Activations
+
+First, to generate the training dataset for our SAEs, you must generate vision model activations and save them to disk in shard files. For this work, we use DINOv3-SAT493M ViT-L/16. Download this model to your cluster and modify the `--cfg.ckpt` parameter in `scripts/shards.sh` to point to the location of this model. Additionally, modify `--cfg.shards-root` to point to the location you'd like to save the vision model activations to, as well as all parameters regarding slurm project/partition as needed. Finally, generate vision model activations:
+
+```bash
+bash saes/scripts/shards.sh
+```
