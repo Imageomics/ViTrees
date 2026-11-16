@@ -61,3 +61,15 @@ __pycache__/
 # saev log files 
 logs/
 .wandb/
+
+# Generated geospatial grid/disturbance outputs (large, reproducible from scripts)
+*.gpkg
+*.gpkg-shm
+*.gpkg-wal
+*.shp
+*.shx
+*.dbf
+*.kml
+*.prj
+data/*.csv
+
